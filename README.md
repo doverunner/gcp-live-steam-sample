@@ -1,4 +1,4 @@
-# PallyCon GCP Live Packaging Integration Sample
+# PallyCon GCP Live Stream Integration Sample
 
 This sample shows how to integrate PallyCon Multi DRM with Google Cloud Live Stream API v1 using [API Client Libraries](https://cloud.google.com/livestream/docs/reference/libraries). Since this sample focused on DRM integration, only a simple scenario of applying Widevine, PlayReady, and FairPlay DRM to a live stream in fmp4 format is used, see the [references link](https://cloud.google.com/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/latest) for more information about Live Stream API v1 features.
 
