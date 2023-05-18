@@ -1,22 +1,40 @@
-# PallyCon GCP Live Stream Integration Sample
-
+---------------------------------------
+# Google Cloud Live Stream API & PallyCon DRM Integration Sample
 This sample shows how to integrate PallyCon Multi DRM with Google Cloud Live Stream API v1 using [API Client Libraries](https://cloud.google.com/livestream/docs/reference/libraries). Since this sample focused on DRM integration, only a simple scenario of applying Widevine, PlayReady, and FairPlay DRM to a live stream in fmp4 format is used, see the [references link](https://cloud.google.com/dotnet/docs/reference/Google.Cloud.Video.LiveStream.V1/latest) for more information about Live Stream API v1 features.
 
-## Prerequisites
 
+
+---------------------------------------
+## Prerequisites
 - A Windows 10/11 PC
 - Visual Studio 2022 (Windows 10/11)
 - .NET 6.0 SDK : https://dotnet.microsoft.com/download
 - Google Cloud account : https://cloud.google.com/
   - Create a project : https://cloud.google.com/resource-manager/docs/creating-managing-projects
   - Create a bucket : https://cloud.google.com/storage/docs/creating-buckets
+- Google Application Default Credentials (ADC) : https://cloud.google.com/docs/authentication/provide-credentials-adc
+
+- Identity and Access Management (IAM)
+
+  - roles/livestream.editor
+
+  - roles/storage.admin
+
+  - roles/secretmanager.admin
+
+  - roles/secretmanager.secretAccessor
+    - This role should be granted to the service account, not the user, as it is the permission to access Google Secret from the service API. 
+
+    - https://cloud.google.com/livestream/docs/access-control#access_to_gcs
+
 - KMS token used for CPIX API communication with PallyCon KMS. This is an API authentication token that is generated when you sign up PallyCon service, and can be found on the PallyCon Console site.
 - Encoder to generate the input stream that the API processes.
 
   - In this sample, [ffmpeg](https://ffmpeg.org/download.html) is used.
 
+  
+---------------------------------------
 ## How to launch the project and test
-
 1. Clone or download this sample repository.
 2. Open the root /PallyConGoogleLiveStreamSample.sln and select the active project to launch in Visual Studio.
 3. Make sure you have your Google Cloud project, bucket information and PallyCon KMS related information.
@@ -31,10 +49,13 @@ This sample shows how to integrate PallyCon Multi DRM with Google Cloud Live Str
    ```
 8. Check out your packaging results on the Buckets page in Google Cloud console.
 
+   
+---------------------------------------
 ## PallyConKMSClientWrapper
-
 C++/CLI project for wrap a C++ library(*PallyConKmsClient_MD.lib*) to communicate with PallyCon KMS server.
 The _getPackagingInfoFromKmsServer_ function allows you to obtain packaging information from the KMS server.
+
+
 
 ```c#
 bool PallyConKmsClientWrapper::getPackagingInfoFromKmsServer(String^ content_id, String^% key_id, String^% key, String^% iv, String^% hls_key_uri, String^% widevine_pssh, String^% playready_pssh)
@@ -59,10 +80,14 @@ bool PallyConKmsClientWrapper::getPackagingInfoFromKmsServer(String^ content_id,
 }
 ```
 
-## References
 
+
+---------------------------------------
+
+## References
 - https://pallycon.com/docs/en/multidrm/
 - https://pallycon.com/docs/en/multidrm/packaging/cpix-api/
 - https://cloud.google.com/livestream/docs/reference/libraries
 - https://cloud.google.com/secret-manager/docs/reference/libraries#client-libraries-install-csharp
 - https://cloud.google.com/livestream/docs/reference/drm#string
+---------------------------------------
